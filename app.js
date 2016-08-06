@@ -18,38 +18,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static('public')); //for front end
 
-// ROUTES
-let Image = require('./models/image.js'); // bring in image model
-
-app.get('/images', (req, res) => {
-  Image.getAll()
-    .then(images => {
-      res.send(images);
-    })
-    .catch(err => {
-      res.status(400).send(err);
-    });
-})
-
-app.post('/images', (req, res) => {
-  Image.create(req.body)
-    .then(() => {
-      res.send();
-    })
-    .catch(err => {
-      res.status(400).send(err);
-    });
-});
-
-app.delete('/images/:id', (req, res) => {
-  Image.delete(req.params.id) //pulls id out of url
-    .then(() => {
-      res.send();
-    })
-    .catch(err => {
-      res.status(400).send(err);
-    });
-})
+// ROUTES are in routes/images.js
+app.use('/images', require('./routes/images')); // '/images' defines route of router
 
 // SERVER LISTEN
 app.listen(PORT, err => {
