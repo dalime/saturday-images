@@ -14,6 +14,22 @@ router.get('/', (req, res) => {
     });
 })
 
+/*
+Image (titlecased singular) ---> model
+image (lowercased singular) ---> one image object
+images (lowercased plural) ---> array of image objects
+*/
+
+router.get('/:id', (req, res) => {
+  Image.getOne(req.params.id)
+    .then(image => {
+      res.send(image);
+    })
+    .catch(err => {
+      res.status(400).send(err);
+    })
+})
+
 router.post('/', (req, res) => {
   Image.create(req.body)
     .then(() => {

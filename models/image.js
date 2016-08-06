@@ -36,16 +36,27 @@ exports.getAll = function() {
     });
   });
 }
-/*
-exports.getById = function(id) {
+
+exports.getOne = function(id) {
   return new Promise((resolve, reject) => {
     let sql = squel.select()
                     .from('images')
                     .where('id = ?', id)
                     .toString();
+
+    db.query(sql, (err, images) => {
+      let image = images[0];
+      if (err) {
+        reject(err);
+      } else if (!image) {
+        reject({error: 'Image not found.'});
+      } else {
+        resolve(image);
+      }
+    });
   })
 }
-*/
+
 exports.create = function(newImage) { //newImage will be an object created by UI
   return new Promise((resolve, reject) => {
     let timestamp = moment().format('YYYY/MM/DD HH:mm:ss');
