@@ -36,7 +36,16 @@ exports.getAll = function() {
     });
   });
 }
-
+/*
+exports.getById = function(id) {
+  return new Promise((resolve, reject) => {
+    let sql = squel.select()
+                    .from('images')
+                    .where('id = ?', id)
+                    .toString();
+  })
+}
+*/
 exports.create = function(newImage) { //newImage will be an object created by UI
   return new Promise((resolve, reject) => {
     let timestamp = moment().format('YYYY/MM/DD HH:mm:ss');
@@ -64,10 +73,33 @@ exports.delete = function(id) {
                     .where('id = ?', id)
                     .toString();
 
+    db.query(sql, (err, result) => {
+      if (result.affectedRows === 0) {
+        reject({error: 'Image not found.'})
+      } else if (err) {
+        reject(err)
+      } else {
+        resolve();
+      }
+    });
+  });
+};
 
-    db.query(sql, err => {
-      if (err) {
-        reject (err);
+exports.update = function(id, updateObj) {
+  return new Promise((resolve, reject) => {
+    delete updateObj.id;
+    delete updateObj.createdAt;
+    let sql = squel.update()
+                    .table('images')
+                    .setFields(updateObj)
+                    .where('id = ?', id)
+                    .toString();
+
+    db.query(sql, (err, status) => {
+      if (status.affectedRows === 0) {
+        reject({error: 'Image not found.'})
+      } else if (err) {
+        reject(err)
       } else {
         resolve();
       }
