@@ -56,3 +56,21 @@ exports.create = function(newImage) { //newImage will be an object created by UI
     });
   });
 };
+
+exports.delete = function(id) {
+  return new Promise((resolve, reject) => {
+    let sql = squel.delete()
+                    .from('images')
+                    .where('id = ?', id)
+                    .toString();
+
+
+    db.query(sql, err => {
+      if (err) {
+        reject (err);
+      } else {
+        resolve();
+      }
+    });
+  });
+};
