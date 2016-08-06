@@ -31,6 +31,23 @@ app.get('/images', (req, res) => {
     });
 })
 
+app.post('/images', (req, res) => {
+  /*
+  {
+  title:
+  url:
+  description:
+}
+*/
+  Image.create(req.body)
+    .then(() => {
+      res.send();
+    })
+    .catch(err => {
+      res.status(400).send(err);
+    });
+});
+
 // SERVER LISTEN
 app.listen(PORT, err => {
   console.log(err || `Server listening on port ${PORT}`);
