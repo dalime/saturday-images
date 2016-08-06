@@ -1,7 +1,7 @@
 $(() => {
   renderAllImages();
-
   $('.images').on('click', '.edit', openEditModal);
+  $('#editModal').find('form').submit(saveEdit);
 });
 
 function openEditModal(event) {
@@ -27,6 +27,31 @@ function openEditModal(event) {
   });
 }
 
+function saveEdit(event) {
+  event.preventDefault();
+  let $editModal = $('#editModal');
+
+  let id = $editModal.data('editingId');
+  let url = $editModal.find('.url').val();
+  let title = $editModal.find('.title').val();
+  let description = $editModal.find('.description').val();
+
+  $.ajax({
+    url: `/images/${id}`,
+    method: 'PUT',
+    data: {url, title, description} //es6 allows for setting variables
+  })
+  .done(newImage => {
+    renderAllImages();
+  })
+  .fail(err => {
+    console.log('err: ', err);
+  })
+  .always(() => { //.always is only in ajax promises
+    $editModal.modal('hide');
+  });
+}
+
 function renderAllImages() {
   // Request all images in DB and render in DOM
   $.get('/images') //dont specify localhost, will break heroku
@@ -47,7 +72,7 @@ function renderAllImages() {
         return $image;
       });
 
-      $('.images').append($images);
+      $('.images')empty().append($images); //.empty clears list before appending new ones
 
     })
     .fail(err => {
