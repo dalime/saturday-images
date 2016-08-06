@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Imageland</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
+  <script src="http://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js"></script>
+  <script src="main.js"></script>
+</head>
+<body>
+  <div class="container">
+
+    <div class="row">
+      <div class="col-xs-12">
+        <h1 class="text-center">Imageland!</h1>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12 images">
+
+
+
+      </div>
+    </div>
+
+
+    <div class="media hidden template">
+      <div class="media-left">
+        <a href="#">
+          <img class="media-object">
+        </a>
+      </div>
+      <div class="media-body">
+        <h4 class="media-heading title"></h4>
+        <h5 class="createdAt"></h5>
+        <p class="description"></p>
+        <button class="btn btn-primary edit">Edit</button>
+      </div>
+    </div>
+
+    <div id="editModal" class="modal fade" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <form>
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Edit Image</h4>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+            <label>Image URL</label>
+            <input type="text" class="form-control url">
+            </div>
+
+            <div class="form-group">
+            <label>Title</label>
+            <input type="text" class="form-control title">
+            </div>
+
+            <div class="form-group">
+            <label>Description</label>
+            <input type="text" class="form-control description">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

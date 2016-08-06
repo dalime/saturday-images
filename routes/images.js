@@ -4,6 +4,12 @@ const router = express.Router(); // Router is title cased
 // ROUTES
 const Image = require('../models/image.js'); // bring in image model
 
+
+//////////////
+// IMAGES ROUTE
+// base url: /images
+//////////////
+
 router.get('/', (req, res) => {
   Image.getAll()
     .then(images => {
