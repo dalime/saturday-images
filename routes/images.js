@@ -53,7 +53,10 @@ router.delete('/:id', (req, res) => {
 router.put('/:id', (req, res) => {
   Image.update(req.params.id, req.body)
     .then(() => {
-      res.send();
+      return Image.getOne(req.params.id); //returns a promise of an image
+    }) //chained promises
+    .then(image => {
+      res.send(image); //returns image once promise is returned from above
     })
     .catch(err => {
       res.status(400).send(err);
